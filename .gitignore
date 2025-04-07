@@ -1,0 +1,42 @@
+# Node dependencies
+node_modules/
+
+# Output directories
+dist/
+build/
+
+# Runtime environment files
+.env
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# VS Code settings (optional: keep if using team-specific settings)
+.vscode/
+
+# OS-generated files
+*.swp
+*.swo
+
+# Mac metadata
+.AppleDouble
+.LSOverride
+
+# Test coverage output
+coverage/
+
+# CLI debug output
+*.log
+
+# Optional lockfiles (use one per project type)
+package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
