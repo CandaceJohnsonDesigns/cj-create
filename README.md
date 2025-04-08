@@ -59,8 +59,8 @@ Follow the prompts to:
 
 Choose a project type
 - Enter name, author, license, and other metadata
-Scaffold files and replace placeholders
-Create a GitHub repo (if desired)
+- Scaffold files and replace placeholders
+- Create a GitHub repo (if desired)
 
 ⚙️ Configure Default Vendor Info
 ```bash
