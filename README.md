@@ -83,12 +83,12 @@ templates/
 
 ## 🛣️ Roadmap
 
-See the full roadmap and task tracker in TASKS.md.
+See the full roadmap and task tracker in [TASKS.md](TASKS.md).
 
 ## 💡 Ideas and Contributions
 
 Have an idea for a new template or automation feature?
-Please use the 🚀 Future Idea issue template.
+Please use the [🚀 Future Idea](.github/ISSUE_TEMPLATE/future_idea.yml) issue template.
 
 ## 🧠 Inspiration
 
