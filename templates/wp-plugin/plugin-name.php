@@ -1,23 +1,26 @@
 /**
- * Plugin Name
+ * [[PLUGIN_NAME]]
  *
- * @package           PluginPackage
+ * @package           [[PLUGIN_NAMESPACE]]
  * @author            [[AUTHOR_NAME]]
- * @copyright         2019 Candace Johnson Designs
- * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
  * Plugin Name:       [[PLUGIN_NAME]]
  * Plugin URI:        [[PLUGIN_URI]]
- * Description:       Description of the plugin.
- * Version:           1.0.0
- * Requires at least: 5.2
- * Requires PHP:      7.2
- * Author:            [[AUTHOR_NAME]]
+ * Description:       [[PLUGIN_DESCRIPTION]]
+ *
+ * Version:           [[PLUGIN_VERSION]]
+ * Requires at least: [[MIN_WORDPRESS_VERSION]]
+ * Requires PHP:      [[MIN_PHP_VERSION]]
+ *
+ * Author:            [[AUTHOR_NAMES]]
  * Author URI:        [[AUTHOR_URI]]
+ *
+ * License:           [[PLUGIN_LICENSE]]
+ * License URI:       [[PLUGIN_LICENSE_URI]]
+ *
  * Text Domain:       [[PLUGIN_SLUG]]
- * License:           GPL v2 or later
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Domain Path:  	  [[PATH_TO_TRANSLATIONS]]
  */
 
  if ( ! defined( 'ABSPATH' ) ) {
