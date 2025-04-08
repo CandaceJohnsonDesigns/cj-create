@@ -4,13 +4,12 @@ import prompts from 'prompts';
 import chalk from 'chalk';
 import simpleGit from 'simple-git';
 import { execSync } from 'child_process';
-import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { scaffoldTemplate } from './lib/copy-template.js';
 
 console.log(chalk.blueBright('\n🚀 CJ Project Starter\n'));
 
-// Needed to get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -41,19 +40,16 @@ const response = await prompts([
 const { projectName, type, private: isPrivate } = response;
 const projectDir = path.resolve(__dirname, '..', projectName);
 
-// Create and move into new project folder
-fs.mkdirSync(projectDir);
-process.chdir(projectDir);
+// Scaffold files from the chosen template
+await scaffoldTemplate(type, projectName, projectDir);
 
-// Write default files
-fs.writeFileSync('README.md', `# ${projectName}\n\nStarter project (${type})`);
-fs.writeFileSync('.gitignore', 'node_modules/\ndist/\n.env\n');
-
+// Initialize Git
 const git = simpleGit();
 await git.init();
 await git.add('.');
 await git.commit('Initial commit');
 
+// Create GitHub repository and push
 execSync(`gh repo create ${projectName} --${isPrivate ? 'private' : 'public'} --source=. --push`, {
   stdio: 'inherit',
 });
