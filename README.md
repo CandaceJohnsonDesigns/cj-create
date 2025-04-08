@@ -50,26 +50,26 @@ cd cj-create
 npm install
 ```
 
-🛠️ Create a New Project
+### 🛠️ Create a New Project
 ```bash
 node index.js
 ```
 
 Follow the prompts to:
 
-Choose a project type
+- Choose a project type
 - Enter name, author, license, and other metadata
 - Scaffold files and replace placeholders
 - Create a GitHub repo (if desired)
 
-⚙️ Configure Default Vendor Info
+### ⚙️ Configure Default Vendor Info
 ```bash
 node index.js config
 ```
 
 This lets you set your default organization or author name (e.g., "Candace Johnson Designs").
 
-📁 Templates Directory
+## 📁 Templates Directory
 
 All project templates are stored in:
 ```arduino
@@ -81,20 +81,20 @@ templates/
     └── ...
 ```
 
-🛣️ Roadmap
+## 🛣️ Roadmap
 
 See the full roadmap and task tracker in TASKS.md.
 
-💡 Ideas and Contributions
+## 💡 Ideas and Contributions
 
 Have an idea for a new template or automation feature?
 Please use the 🚀 Future Idea issue template.
 
-🧠 Inspiration
+## 🧠 Inspiration
 
 This tool was built to streamline the repetitive aspects of solo development projects — and help me stay organized with Git, GitHub, and consistent setup patterns.
 
-📝 License
+## 📝 License
 
 MIT License (you can update this as needed)
 
