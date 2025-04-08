@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "chalk": "^5.4.1",
+    "fs-extra": "^11.3.0",
     "prompts": "^2.4.2",
     "simple-git": "^3.27.0"
   }
