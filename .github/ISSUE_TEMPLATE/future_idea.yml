@@ -1,0 +1,28 @@
+name: 🚀 Future Idea
+description: Capture a potential improvement or feature for the CLI
+title: '[idea]: '
+labels: [future idea, enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Describe the idea
+      placeholder: What would this feature do? Why is it useful?
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context or references
+      placeholder: Include related issues, use cases, or links if relevant.
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - Low
+        - Medium
+        - High
+        - Unsure
