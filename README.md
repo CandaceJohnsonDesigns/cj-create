@@ -97,14 +97,3 @@ This tool was built to streamline the repetitive aspects of solo development pro
 ## 📝 License
 
 MIT License (you can update this as needed)
-
-## 🔄 What You’ll Want to Update as You Grow
-
-| Section | When to Update |
-|--------|----------------|
-| **Usage** | If you add CLI flags or global support |
-| **Templates** | When adding more types like React or Laravel |
-| **Roadmap** | When completing key features |
-| **Inspiration** | If you publish it or collaborate with others |
-
----
