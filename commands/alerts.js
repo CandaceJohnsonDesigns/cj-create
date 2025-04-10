@@ -1,23 +1,27 @@
 import fs from 'fs';
-import path from 'path';
 import { globby } from 'globby';
 import chalk from 'chalk';
 import { ALERT_TYPES } from '../lib/alert-types.js';
 
-// Parse CLI flags passed in the command line
+// Capture CLI arguments
 const args = process.argv.slice(2);
 
-// Helper to get value from a flag (e.g. --type todo)
+// Helper: Get the value for a given flag, e.g. --type fixme => "fixme"
 const getFlagValue = (flag) => {
   const index = args.findIndex(arg => arg === `--${flag}`);
   return index !== -1 ? args[index + 1] : null;
 };
 
-// Helper to check if a flag exists (boolean flags like --show-all)
+// Helper: Check if a flag is present, e.g. --show-all
 const hasFlag = (flag) => args.includes(`--${flag}`);
+
+// Check if help output should be shown
 const showHelp = hasFlag('help');
 
-// Show help menu if --help is passed
+// Used to limit scan to only staged files (for pre-commit hooks)
+const stagedOnly = hasFlag('staged');
+
+// Show usage information if --help flag is present
 if (showHelp) {
   console.log(`\nUsage: cj-create alerts [options]
 
@@ -26,24 +30,47 @@ Options:
                      Use comma-separated values for multiple types
   --level <value>    Filter by severity level (required, optional, all)
   --show-all         Shortcut for --level all
+  --staged           Only scan staged files (used in pre-commit hooks)
   --help             Show this help message
 `);
   process.exit(0);
 }
 
-// Get type filter from flags (default to 'all') and split for multiple types
+// Parse type filter(s) from flags
 const typeFilterRaw = getFlagValue('type') || 'all';
 const typeFilters = typeFilterRaw.toLowerCase().split(',');
 
-// Get level filter from flags (default to 'required')
+// Default severity level filter flag to only required alerts unless specified
 const levelFilter = getFlagValue('level') || (hasFlag('show-all') ? 'all' : 'required');
 
+// Determine which files to scan based on developer's selection: --staged or all files in the project
+const getFilesToScan = async () => {
+    // If --staged is used, only scan staged files from Git
+  if (stagedOnly) {
+    const execSync = (await import('child_process')).execSync;
+    const output = execSync('git diff --cached --name-only', { encoding: 'utf8' });
+    return output
+      .split('\n')
+      .filter((file) => file.match(/\.(js|ts|php)$/) && fs.existsSync(file));
+  } 
+
+  // Check if the current directory is not a recognized project folder
+  if (!fs.existsSync('.cjproject.json')) {
+    console.log(chalk.redBright('\n⚠️ Not a recognized project folder (missing .cjproject.json).\n'));
+    process.exit(1);
+  }
+
+  // Otherwise scan all files in the project directory that match our patterns
+  return await globby(['**/*.{js,ts,php}', '!node_modules/**', '!dist/**']);
+};
+
+// Scans requested files for developer alerts based on the specified patterns
 const scanAlerts = async () => {
-  // Scan all relevant files (JS, TS, PHP), excluding node_modules and dist
-  const files = await globby(['**/*.{js,ts,php}', '!node_modules/**', '!dist/**']);
+    // Retrieve the 
+  const files = await getFilesToScan();
   const results = [];
 
-  // Check each file for alert pattern matches
+  // Iterate through each file and each line
   for (const file of files) {
     const lines = fs.readFileSync(file, 'utf8').split('\n');
     lines.forEach((line, index) => {
@@ -62,13 +89,13 @@ const scanAlerts = async () => {
     });
   }
 
-  // Separate alerts by severity level
+  // Group alerts by their severity level: required or optional
   const byLevel = {
     required: results.filter(r => r.level === 'required'),
     optional: results.filter(r => r.level === 'optional')
   };
 
-  // Helper to group results by their label (e.g. TODO, FIXME)
+  // Group alerts by their tag/label (e.g., TODO!, FIXME)
   const groupByLabel = (items) => {
     return items.reduce((acc, item) => {
       if (!acc[item.label]) acc[item.label] = [];
@@ -79,7 +106,7 @@ const scanAlerts = async () => {
 
   console.log('\n' + chalk.cyanBright('🔎 Developer Alerts'));
 
-  // Render required alerts fully if applicable
+  // Show required alerts (detailed view)
   if (levelFilter === 'required' || levelFilter === 'all') {
     const requiredGroups = groupByLabel(byLevel.required);
     Object.entries(requiredGroups).forEach(([label, entries]) => {
@@ -92,7 +119,7 @@ const scanAlerts = async () => {
     console.log(chalk.green('\n✅ No required alerts shown.'));
   }
 
-  // Render optional alerts based on filter
+  // Show optional alerts in detail if requested, otherwise show summary
   if (levelFilter === 'optional' || levelFilter === 'all') {
     const optionalGroups = groupByLabel(byLevel.optional);
     const filteredOptionalLabels = typeFilters.includes('all')
@@ -110,19 +137,19 @@ const scanAlerts = async () => {
       });
     });
   } else {
-    // Otherwise, summarize optional alerts by label and count only
+    // Only show a count summary of optional alerts
     const optionalGroups = groupByLabel(byLevel.optional);
     Object.entries(optionalGroups).forEach(([label, entries]) => {
       console.log(chalk.yellow(`\n🔹 ${label} (${entries.length}) View all →`));
     });
   }
 
-  // Block commit if required alerts still exist
+  // Block commit or exit with error if required alerts still exist
   if (byLevel.required.length > 0) {
     console.log(chalk.redBright('\n🚫 Commit blocked: Resolve all required alerts before continuing.\n'));
     process.exit(1);
   }
 };
 
-// Run the scan
+// Run the alert scan
 await scanAlerts();
