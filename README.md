@@ -19,7 +19,7 @@ CJ-Create simplifies your project startup workflow by:
 
 ## Features
 
-### Current
+### Current Features
 
 ✅ Modular scaffolding by project type  
 ✅ Per-type prompt configuration  
@@ -28,15 +28,13 @@ CJ-Create simplifies your project startup workflow by:
 ✅ Shared configuration for organization-wide consistency
 ✅ Clean separation of templates and CLI logic  
 
----
-
-#### Templatess
+#### Current Scaffolding Templates
 
 - `wp-plugin` (IN PROGRESS: Model template for procedure design)
 
 ---
 
-### In Development
+### Features in Development
 
 | Feature               | Description                                                                 |
 |-----------------------|-----------------------------------------------------------------------------|
@@ -48,7 +46,7 @@ CJ-Create simplifies your project startup workflow by:
 
 ---
 
-### 🔧 Planned
+### Planned Features
 
 - PHP class autoloading system
 - Git tag-based version bumping
