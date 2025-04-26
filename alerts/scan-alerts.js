@@ -1,4 +1,4 @@
-import { loadAlertConfig } from '../lib/loadAlertConfig.js';
+import { loadAlertConfig } from '../lib/load-alert-config.js';
 
 // TODO: Modify this once workspace support is complete
 // Currently assumes scanning the current working directory
