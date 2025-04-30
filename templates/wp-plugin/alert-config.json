@@ -1,0 +1,6 @@
+{
+    "mergeDefaults": true,
+    "fileExtensions": [".js", ".php"],
+    "ignoredDirectories": ["node_modules", "vendor"]
+}
+  
