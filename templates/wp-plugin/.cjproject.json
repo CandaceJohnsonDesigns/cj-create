@@ -1,0 +1,6 @@
+{
+  "type": "wp-plugin",
+  "name": "[[PLUGIN_NAME]]",
+  "slug": "[[PLUGIN_SLUG]]",
+  "created": "[[DATE_CREATED]]"
+}
