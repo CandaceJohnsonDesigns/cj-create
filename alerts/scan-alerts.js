@@ -3,7 +3,7 @@ import { globby } from 'globby';
 import chalk from 'chalk';
 import { execSync } from 'child_process';
 import { loadAlertConfig } from '../lib/load-alert-config.js';
-import { ALERT_TYPES } from '../lib/alert-types.js';
+import { ALERT_TYPES } from '../lib/alerts/alert-types.js';
 
 /**
  * Scans the current project for developer alerts (TODO, FIXME, etc.)

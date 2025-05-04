@@ -7,7 +7,7 @@ import { execSync } from 'child_process';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { configureCli } from './lib/configure-cli.js';
+import { configureCli } from './lib/cli/configure-cli.js';
 import { getVendorConfig } from './lib/config.js';
 import { scaffoldTemplate } from './lib/copy-template.js';
 
