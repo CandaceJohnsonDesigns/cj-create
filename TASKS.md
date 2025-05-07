@@ -36,6 +36,11 @@
 
 - [x] **Initialized Changelog with `standard-version`**  </br>
       Generated the initial `CHANGELOG.md` and Git tag using `standard-version`
+
+- [x] **User Profile System with Role-Based Access Control** </br>
+      - Securely generates a local user profile at `~/.cj-create/users/`.
+      - Automatically assigns super-admin to the first user.
+      - Includes utilities to load user profiles and check for existing admins.
       
 --- 
 
@@ -92,6 +97,9 @@
       Implementing tools or hooks to ensure all commit messages adhere to the 
       Conventional Commits standard, facilitating automated changelog generation 
       and versioning.
+
+- [ ] **User Role Escalation and Management** </br>
+      Add ability for existing super-admins to promote or manage users.
 
 ---
 
