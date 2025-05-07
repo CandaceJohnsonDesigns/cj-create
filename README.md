@@ -26,7 +26,10 @@ CJ-Create simplifies your project startup workflow by:
 ✅ Placeholder replacement in all files  
 ✅ Git initialization with commit and branch creation
 ✅ Shared configuration for organization-wide consistency
-✅ Clean separation of templates and CLI logic  
+✅ Clean separation of templates and CLI logic
+✅ User Profile System
+✅ Secure Local User Storage
+✅ Automatic Super-Admin Assignment for First User  
 
 #### Current Scaffolding Templates
 
@@ -64,6 +67,30 @@ CJ-Create simplifies your project startup workflow by:
 git clone https://github.com/YOUR_USERNAME/cj-create.git
 cd cj-create
 npm install
+```
+
+### 🛠️ User Profile Management
+- User profiles are securely stored in `~/.cj-create/users/`.
+- The first user is automatically assigned the `super-admin` role.
+- Profiles are protected with OS-level permissions (chmod 600).
+- Includes the following utilities:
+  - `generateUserProfile()` - Creates a new user profile with unique ID.
+  - `loadUserProfile(userId)` - Loads a specific user profile.
+  - `hasAnySuperAdmin()` - Checks if any user is a super-admin.
+
+#### 📋 Common Commands
+User profiles are stored securely under:
+`~/.cj-create/users/`
+
+The first user created is automatically assigned the super-admin role.
+Example: Create a new user profile
+```bash
+node index.js create-user
+```
+
+Example: Load a user profile by ID
+```bash
+node index.js load-user <userId>
 ```
 
 ### ⚙️ Configure Default Vendor Info
